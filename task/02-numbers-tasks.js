@@ -55,7 +55,20 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    throw new Error('Not implemented');
+    var temp;
+    if (value1 > value2) {
+        if (value2 < 0) {
+            return (value2 + value1) / 2;
+        }
+        temp = value1 - value2;
+        return value2 + (temp / 2);
+    } else {
+        if (value1 < 0) {
+            return (value2 + value1) / 2;
+        }
+        temp = value2 - value1;
+        return value1 + (temp / 2);
+    }
 }
 
 /**
@@ -112,7 +125,17 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    var cos;
+    cos = (x1*x2 + y1*y2)/(Math.sqrt(Math.pow(x1,2)+Math.pow(y1,2))*Math.sqrt(Math.pow(x2,2)+Math.pow(y2,2)));
+    switch(cos) {
+        case 0:
+            return Math.PI/2;
+        case -1:
+            return Math.PI;
+        case 1:
+            return 0;
+    }
+
 }
 
 /**
@@ -161,7 +184,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-    return Math.sqrt(Math.pow(a)+Math.pow(b)+Math.pow(c));
+    return Math.sqrt(Math.pow(a, 2)+Math.pow(b, 2)+Math.pow(c, 2));
 }
 
 /**
@@ -182,7 +205,7 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    return Math.round(num / Math.pow(10,pow)) * Math.pow(10,pow);
 }
 
 /**
@@ -203,9 +226,23 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    throw new Error('Not implemented');
+    var i = 0;
+    if (n <= 1){
+        return false;
+    } else if (n <= 3) {
+        return true;
+    } else if ((n % 2 == 0) || (n % 3 == 0)){
+        return false;
+    }
+    i = 5;
+    while (i * i <= n) {
+        if ((n % i == 0) || (n % (i + 2) == 0)) {
+            return false;
+        }
+        i += 6;  
+    }
+    return true
 }
-
 /**
  * Пытается преобразовать первый агумент функции в число и возвращает его, если конвертация была успешной;
  * в противном случае возвращает значение второго аргумента.
@@ -222,7 +259,11 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    if (Number.isInteger(+value)) {
+        return +value;
+    } else {
+        return def;
+    }
 }
 
 module.exports = {
