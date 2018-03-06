@@ -142,7 +142,9 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    var first = str.indexOf(value);
+    var len = value.length;
+    return (str.substring(0, first) + str.substring(first + len, str.length));
 }
 
 /**
@@ -172,7 +174,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -186,7 +188,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -250,7 +252,13 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+	throw new Error('Not implemented');
+	/*
+    if (typeof(value) == "string") {
+    	return true;
+    } else {
+    	return false;
+    }*/
 }
 
 
