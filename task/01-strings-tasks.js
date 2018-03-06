@@ -69,7 +69,15 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    value = value.substring(0, value.length - 1);
+    var splitedStr = value.split(' ');
+	var resultStr = '';
+	for (var i = 0; i < splitedStr.length; i++) {
+    	if ((splitedStr[i] != "Hello,")) {    
+        	resultStr += splitedStr[i] + ' ';    
+    	}
+	}
+	return resultStr.substring(0, resultStr.length - 1);
 }
 
 
@@ -114,11 +122,15 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-	throw new Error('Not implemented');
+	var extract = "";
+	for (var i = 0; i < count; i++){
+		extract += value;
+	}
+	return extract;
 }
 
 /**
- * Удаляет первую встретившуюся последовательность симвоов из строки
+ * Удаляет первую встретившуюся последовательность символов из строки
  * 
  * @param {string} str
  * @param {string} value
@@ -145,7 +157,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.substring(1, str.length - 1);
 }
 
 
