@@ -11,7 +11,7 @@
 
 
 /**
- * Возвращает индекс переденного элемента в массиве, а если он остутствует то возвращает -1
+ * Возвращает индекс переданного элемента в массиве, а если он остутствует то возвращает -1
  *
  * @param {array} arr
  * @param {any} value
@@ -23,7 +23,9 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   throw new Error('Not implemented');
+   if(arr.indexOf) {
+      return arr.indexOf(value);
+    } else return (-1);
 }
 
 /**
@@ -39,7 +41,7 @@ function findElement(arr, value) {
  */
 function generateOdds(len) {
    throw new Error('Not implemented');
-}
+ }
 
 /**
  * Возвращает массив состоящий из двух копий переданного массива
@@ -53,7 +55,7 @@ function generateOdds(len) {
  *    [] => []
  */
 function doubleArray(arr) {
-   throw new Error('Not implemented');
+  return arr.concat(arr);
 }
 
 
@@ -69,7 +71,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-   throw new Error('Not implemented');
+    return arr.filter((item, i) => item > 0);
 }
 
 /**
@@ -84,7 +86,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-   throw new Error('Not implemented');
+  return arr.filter((item, i) => typeof (item) == "string");
 }
 
 /**
@@ -115,7 +117,9 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-   throw new Error('Not implemented');
+  return arr.map((item, i) => {
+        return (item).toUpperCase();
+  })
 }
 
 
@@ -130,7 +134,7 @@ function getUpperCaseStrings(arr) {
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-   throw new Error('Not implemented');
+  return arr.map((item, i) => item.length);
 }
 
 /**
@@ -145,7 +149,7 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-   throw new Error('Not implemented');
+  return arr.splice(index, 0, item);
 }
 
 /**
@@ -159,7 +163,7 @@ function insertItem(arr, item, index) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
 function getHead(arr, n) {
-   throw new Error('Not implemented');
+  return arr.splice(0, n);  
 }
 
 
@@ -174,7 +178,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-   throw new Error('Not implemented');
+  return arr.splice(-n);  
 }
 
 
@@ -214,7 +218,7 @@ function toCsvText(arr) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-   throw new Error('Not implemented');
+  return arr.map((item, i) => item * item);
 }
 
 
@@ -248,16 +252,18 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   throw new Error('Not implemented');
+  return arr.filter((item, i) => {
+    return (i + 1) % 2 == 0;
+  })
 }
 
 
 /**
- * Возвращает новый массив, в котором каждый качальный элемент исходного массива будет
+ * Возвращает новый массив, в котором каждый начальный элемент исходного массива будет
  * повторен в конечном массиве n-ое количество раз
  * N - [1...a.length] - номер места по порядку на котором располагается соответствующий элемент в начальном массиве
  *
- * @param {array} arr
+ * @param {array} arr 
  * @return {array}
  *
  * @example :
