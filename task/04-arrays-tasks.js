@@ -40,7 +40,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   throw new Error('Not implemented');
+   return Array(len).fill(0).map(function (x, y) {return 2 * y + 1});
  }
 
 /**
@@ -103,7 +103,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-   throw new Error('Not implemented');
+   return arr.filter(x => x);
 }
 
 /**
@@ -117,9 +117,7 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-  return arr.map((item, i) => {
-        return (item).toUpperCase();
-  })
+  return arr.map(x => x.toUpperCase());
 }
 
 
@@ -134,7 +132,7 @@ function getUpperCaseStrings(arr) {
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-  return arr.map((item, i) => item.length);
+  return arr.map(x => x.length);
 }
 
 /**
@@ -203,7 +201,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-   throw new Error('Not implemented');
+   return arr.join('\n');
 }
 
 /**
@@ -292,7 +290,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-   throw new Error('Not implemented');
+   return arr.sort((a, b) => b - a).slice(0, arr.length > 3 ? 3 : arr.length);
 }
 
 
@@ -310,7 +308,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+   return arr.filter(x => x > 0 && typeof x != 'string').length;
 }
 
 /**
@@ -327,7 +325,8 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+   var strRep = ['zero','one','two','three','four','five','six','seven','eight','nine'];
+   return arr.sort((a, b) => strRep.indexOf(a) - strRep.indexOf(b));
 }
 
 /**
@@ -343,7 +342,9 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+   if (arr.length > 0) {
+      return arr.reduce((x, y) => x + y);
+   } else return 0; 
 }
 
 /**
