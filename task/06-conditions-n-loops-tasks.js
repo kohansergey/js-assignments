@@ -136,7 +136,8 @@ function isTriangle(a,b,c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return !(rect1.top > (rect2.height + rect2.top) || (rect1.top + rect1.height) < rect2.top ||
+        (rect1.left + rect1.width) < rect2.left || rect1.left > (rect2.width + rect2.left));   
 }
 
 
@@ -167,7 +168,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return ((Math.pow((point.x - circle.center.x), 2) + Math.pow((point.y - circle.center.y), 2)) < Math.pow(circle.radius, 2));
 }
 
 
@@ -183,15 +184,11 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
-    /* LATER!
-    for(let i = 0; i < str.length; i++){
-        for(let j = i; j < str.length; j++){
-            if()
-        }
-        return str[i];
+    for (let i = 0; i < Math.round(str.length / 2); i++) {
+        if (str.slice(i + 1).indexOf(str[i]) == -1)
+            return str[i];
     }
-    return null;*/
+    return null;
 }
 
 
@@ -255,13 +252,6 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  */
 function reverseString(str) {
     return str.split("").reverse().join("");
-    /*
-    var output = '', i;
-    for (i = str.length - 1; i >= 0; i--) {
-        output += str.charAt(i);
-    }
-    return output;
-    */
 }
 
 
@@ -411,7 +401,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 

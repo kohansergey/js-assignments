@@ -613,7 +613,7 @@ function swapHeadAndTail(arr) {
   arr.length % 2 != 0 ? center.push(Math.round(arr.length / 2)) : false;
   head.length = Math.floor(head.length / 2);
   let tail = [...arr];
-  tail = tail.splice(Math.round(tail.length / 2));
+  tail = tail.splice(Math.round(tail.length /   2));
   return([...tail,...center,...head]);
 }
 

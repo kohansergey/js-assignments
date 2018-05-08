@@ -65,7 +65,10 @@ function* getPermutations(chars) {
  *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
-    throw new Error('Not implemented');
+    if (!quotes.length) return 0;
+    let maxNum = Math.max.apply(null, quotes);
+    let indMax = quotes.lastIndexOf(maxNum);
+    return quotes.slice(0, indMax).reduce((prev, curr) => prev += maxNum - curr, 0) + getMostProfitFromStockQuotes(quotes.slice(indMax + 1));
 }
 
 

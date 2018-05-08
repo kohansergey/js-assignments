@@ -34,7 +34,20 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    const numbers = {
+        ' _ | ||_|': 0,
+        '     |  |': 1,
+        ' _  _||_ ': 2,
+        ' _  _| _|': 3,
+        '   |_|  |': 4,
+        ' _ |_  _|': 5,
+        ' _ |_ |_|': 6,
+        ' _   |  |': 7,
+        ' _ |_||_|': 8,
+        ' _ |_| _|': 9
+    };
+    let res = bankAccount.split('\n').slice(0, 3).map(item => item.match(/.../g));
+    return +res[0].map((item, index) => numbers[item + res[1][index] + res[2][index]]).join("");
 }
 
 
@@ -63,7 +76,20 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-    throw new Error('Not implemented');
+    if (text.length < columns){
+        yield text;
+        return;
+    }
+    let num = 0;
+    let prevNum = 0;
+    let str = "";
+    while ((num != -1) && (num <= columns)) {
+        prevNum = num;
+        num = text.indexOf(' ', num + 1);
+    }
+    str = text.slice(0, prevNum);
+    yield str;
+    yield* wrapText(text.slice(prevNum + 1), columns);
 }
 
 

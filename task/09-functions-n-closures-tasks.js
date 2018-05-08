@@ -69,8 +69,11 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-    throw new Error('Not implemented');
+function getPolynom(...args) {
+    return (x) => {
+        return args.length == 3 ? args[0] * x * x + args[1] * x + args[2] :
+            (args.length == 2 ? args[0] * x + args[1] : (args.length == 1 ? args[0] : null));
+    }
 }
 
 
@@ -78,7 +81,7 @@ function getPolynom() {
  * Заменяет переданную функцию и возвращает функцию,
  * которая в первый раз вызывает переданную функцию, а затем всегда возвращает результат кэширования.
  *
- * @params {Function} func - функция для запонимания
+ * @params {Function} func - функция для запоминания
  * @return {Function} запомненная функция
  *
  * @example
@@ -89,7 +92,16 @@ function getPolynom() {
  *   memoizer() => тоже рандомное число  (при всех последующих вызовах возвращается тоже закешированный результат)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    let count = 0;
+    let cache = 0;
+    return () => {
+        if (count < 1) {
+            cache = func();
+            count++;
+            return cache;
+        }
+        return cache;
+    }
 }
 
 
@@ -151,8 +163,10 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args0) {
+    return (...args1) => {
+        return fn(...args0, ...args1);
+    }
 }
 
 
