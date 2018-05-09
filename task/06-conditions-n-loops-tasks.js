@@ -293,7 +293,18 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    let Num = ccn.toString();
+    let len = Num.length;
+    for(let i = 1; i <= len; i++){
+        let p = Number(Num[len - i]);
+        if (i % 2 === 0)
+            p*=2;
+        if (p > 9) 
+           p -= 9;
+        sum += p;
+    }
+    return sum % 10 === 0;
 }
 
 
@@ -342,7 +353,12 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let s;
+    for(;s!==str;) {
+        s = str;
+        str = str.replace(/\<\>|\(\)|\[\]|\{\}/g, () => '');
+    }
+    return str.length === 0;
 }
 
 
@@ -378,7 +394,29 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    let t = (endDate - startDate) / 1000;
+    if(t <= 45) 
+        return 'a few seconds ago';
+    if(t <= 90) 
+        return 'a minute ago';
+    if(t <= 45 * 60) 
+        return Math.round((t - 0.001) / 60) +' minutes ago';
+    if(t <= 90 * 60) 
+        return 'an hour ago';
+    if(t <= 22 * 60 * 60) 
+        return Math.round((t - 0.001) / (60 * 60)) +' hours ago';
+    if(t <= 36 * 60 * 60) 
+        return 'a day ago';
+    if(t <= 25 * 24 * 60 * 60) 
+        return Math.round((t - 0.001) / (24 * 60 * 60)) +' days ago';
+    if(t <= 45 * 24 * 60 * 60) 
+        return 'a month ago';
+    if(t <= 345 * 24 * 60 * 60) 
+        return Math.round((t - 0.001) / (30 * 24 * 60 * 60)) +' months ago';
+    if(t <= 545 * 24 * 60 * 60) 
+        return 'a year ago';
+    if(t >= 545 * 24 * 60 * 60 ) 
+        return Math.round((t - 0.001) / (365 * 24 * 60 * 60)) +' years ago';
 }
 
 /**
@@ -418,7 +456,27 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    let commonPath = "";
+    let parts = new Array(pathes.length);
+    let minLength = Infinity;
+    for (let i = 0; i < pathes.length; i++){
+        parts[i] = pathes[i].split("/");
+        if(parts[i].length < minLength) 
+            minLength = parts[i].length;
+    }
+    for (let i = 0; i < minLength; i++){
+        let partValue = parts[0][i];
+        let j = 1;
+        for (j = 1; j < parts.length; j++){
+            if(parts[j][i] != partValue) 
+                break;
+        }
+        if (j != parts.length){
+            break;
+        }
+        commonPath += partValue + "/";
+    }
+    return commonPath;
 }
 
 
@@ -441,7 +499,19 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    var aNumRows = m1.length, aNumCols = m1[0].length,
+    bNumRows = m2.length, bNumCols = m2[0].length,
+    m = new Array(aNumRows);
+    for (var r = 0; r < aNumRows; ++r) {
+        m[r] = new Array(bNumCols);
+        for (var c = 0; c < bNumCols; ++c) {
+            m[r][c] = 0;
+            for (var i = 0; i < aNumCols; ++i) {
+                m[r][c] += m1[r][i] * m2[i][c];
+            }
+        }
+    }
+    return m;
 }
 
 
@@ -476,7 +546,27 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    if ((position[0][0] == 'X' && position[0][1] == 'X' && position[0][2] == 'X') ||
+        (position[1][0] == 'X' && position[1][1] == 'X' && position[1][2] == 'X') ||
+        (position[2][0] == 'X' && position[2][1] == 'X' && position[2][2] == 'X') ||
+        (position[0][0] == 'X' && position[1][0] == 'X' && position[2][0] == 'X') ||
+        (position[0][1] == 'X' && position[1][1] == 'X' && position[2][1] == 'X') ||
+        (position[0][2] == 'X' && position[1][2] == 'X' && position[2][2] == 'X') ||
+        (position[0][0] == 'X' && position[1][1] == 'X' && position[2][2] == 'X') ||
+        (position[0][2] == 'X' && position[1][1] == 'X' && position[2][0] == 'X'))
+        return 'X';
+    else if 
+        ((position[0][0] == '0' && position[0][1] == '0' && position[0][2] == '0') ||
+        (position[1][0] == '0' && position[1][1] == '0' && position[1][2] == '0') ||
+        (position[2][0] == '0' && position[2][1] == '0' && position[2][2] == '0') ||
+        (position[0][0] == '0' && position[1][0] == '0' && position[2][0] == '0') ||
+        (position[0][1] == '0' && position[1][1] == '0' && position[2][1] == '0') ||
+        (position[0][2] == '0' && position[1][2] == '0' && position[2][2] == '0') ||
+        (position[0][0] == '0' && position[1][1] == '0' && position[2][2] == '0') ||
+        (position[0][2] == '0' && position[1][1] == '0' && position[2][0] == '0'))
+        return '0';
+    else 
+        return undefined;
 }
 
 
