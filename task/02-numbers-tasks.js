@@ -55,20 +55,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    var temp;
-    if (value1 > value2) {
-        if (value2 < 0) {
-            return (value2 + value1) / 2;
-        }
-        temp = value1 - value2;
-        return value2 + (temp / 2);
-    } else {
-        if (value1 < 0) {
-            return (value2 + value1) / 2;
-        }
-        temp = value2 - value1;
-        return value1 + (temp / 2);
-    }
+    return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -103,7 +90,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return (-b)/a;
+    return (-b) / a;
 }
 
 
@@ -125,16 +112,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    var cos;
-    cos = (x1*x2 + y1*y2)/(Math.sqrt(Math.pow(x1,2)+Math.pow(y1,2))*Math.sqrt(Math.pow(x2,2)+Math.pow(y2,2)));
-    switch(cos) {
-        case 0:
-            return Math.PI/2;
-        case -1:
-            return Math.PI;
-        case 1:
-            return 0;
-    }
+    return Math.acos(x1*x2 + y1*y2)/(Math.hypot(x1, y1)*Math.hypot(x2, y2));
 
 }
 
@@ -151,7 +129,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    return value%10;
+    return value % 10;
 }
 
 
@@ -184,7 +162,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-    return Math.sqrt(Math.pow(a, 2)+Math.pow(b, 2)+Math.pow(c, 2));
+    return Math.hypot(a, b, c);
 }
 
 /**
@@ -205,7 +183,7 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    return Math.round(num / Math.pow(10,pow)) * Math.pow(10,pow);
+    return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
 }
 
 /**
@@ -226,7 +204,7 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    var i = 0;
+    let i = 0;
     if (n <= 1){
         return false;
     } else if (n <= 3) {

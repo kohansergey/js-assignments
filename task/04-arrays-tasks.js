@@ -23,9 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-   if(arr.indexOf) {
-      return arr.indexOf(value);
-    } else return (-1);
+   return arr.indexOf(value);
 }
 
 /**
@@ -71,7 +69,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-    return arr.filter((item, i) => item > 0);
+    return arr.filter(item => item > 0);
 }
 
 /**
@@ -86,7 +84,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-  return arr.filter((item, i) => typeof (item) == "string");
+  return arr.filter(item => typeof (item) == "string");
 }
 
 /**
@@ -216,7 +214,7 @@ function toCsvText(arr) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-  return arr.map((item, i) => item * item);
+  return arr.map(item => item * item);
 }
 
 
@@ -391,7 +389,7 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-  return (arr.filter((itemcur, i) => {
+  return (arr.filter((itemcur, i) => { //===
     return (typeof (item) == typeof (itemcur)) && (item == itemcur);
   })).length;
 }

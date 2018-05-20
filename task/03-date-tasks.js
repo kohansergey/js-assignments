@@ -84,7 +84,7 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-    var span = new Date(endDate - startDate);    
+    let span = new Date(endDate - startDate);    
     return span.toISOString().slice(11, -1);
 }
 
@@ -103,7 +103,6 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    //slow solutions
     let milisec = new Date(null);
     milisec.setMilliseconds(date);
     let hours = +(milisec.toISOString().substr(11,2));

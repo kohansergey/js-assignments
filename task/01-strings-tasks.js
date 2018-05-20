@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    return "Hello, " + firstName + " " + lastName + "!";
+    return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -69,15 +69,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    value = value.substring(0, value.length - 1);
-    var splitedStr = value.split(' ');
-	var resultStr = '';
-	for (var i = 0; i < splitedStr.length; i++) {
-    	if ((splitedStr[i] != "Hello,")) {    
-        	resultStr += splitedStr[i] + ' ';    
-    	}
-	}
-	return resultStr.substring(0, resultStr.length - 1);
+    return value.slice(7, value.length - 1);
 }
 
 
@@ -122,8 +114,8 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-	var extract = "";
-	for (var i = 0; i < count; i++){
+	let extract = "";
+	for (let i = 0; i < count; i++){
 		extract += value;
 	}
 	return extract;
@@ -142,9 +134,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    var first = str.indexOf(value);
-    var len = value.length;
-    return (str.substring(0, first) + str.substring(first + len, str.length));
+    return str.replace(value, '');
 }
 
 /**
@@ -215,8 +205,8 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    var newWidth = width - 2, newHeight = height - 2;
-    var str = '┌';
+    let newWidth = width - 2, newHeight = height - 2;
+    let str = '┌';
     for (let i = 0; i < newWidth; i++) {
         str += '─';
     }
@@ -252,8 +242,8 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    var cipherText = '';
-    for (var i = 0; i < str.length; i++) {
+    let cipherText = '';
+    for (let i = 0; i < str.length; i++) {
         if ((str.charCodeAt(i) > 64 && str.charCodeAt(i) < 78) || 
             (str.charCodeAt(i) > 96 && str.charCodeAt(i) < 110)) {
             cipherText += String.fromCharCode(str.charCodeAt(i) + 13);
@@ -316,13 +306,13 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    let arr = [
+    let cards = [
         'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
         'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
         'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
         'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠' 
     ];
-    return arr.indexOf(value);
+    return cards.indexOf(value);
 }
 
 

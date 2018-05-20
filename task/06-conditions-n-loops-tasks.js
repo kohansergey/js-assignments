@@ -99,7 +99,8 @@ function getSumBetweenNumbers(n1, n2) {
 function isTriangle(a,b,c) {
     if((a+b>c) & (a+c>b) & (b+c>a)){
         return true;
-    } else return false;
+    } else 
+        return false;
 }
 
 
@@ -136,7 +137,7 @@ function isTriangle(a,b,c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-    return !(rect1.top > (rect2.height + rect2.top) || (rect1.top + rect1.height) < rect2.top ||
+    return !(rect1.top > (rect2.top + rect2.height) || (rect1.top + rect1.height) < rect2.top ||
         (rect1.left + rect1.width) < rect2.left || rect1.left > (rect2.width + rect2.left));   
 }
 
@@ -185,8 +186,9 @@ function isInsideCircle(circle, point) {
  */
 function findFirstSingleChar(str) {
     for (let i = 0; i < Math.round(str.length / 2); i++) {
-        if (str.slice(i + 1).indexOf(str[i]) == -1)
+        if (str.slice(i + 1).indexOf(str[i]) == -1) {
             return str[i];
+        }
     }
     return null;
 }
@@ -294,15 +296,15 @@ function reverseInteger(num) {
  */
 function isCreditCardNumber(ccn) {
     let sum = 0;
-    let Num = ccn.toString();
-    let len = Num.length;
+    let num = ccn.toString();
+    let len = num.length;
     for(let i = 1; i <= len; i++){
-        let p = Number(Num[len - i]);
+        let x = Number(num[len - i]);
         if (i % 2 === 0)
-            p*=2;
-        if (p > 9) 
-           p -= 9;
-        sum += p;
+            x*=2;
+        if (x > 9) 
+           x -= 9;
+        sum += x;
     }
     return sum % 10 === 0;
 }
@@ -323,9 +325,10 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    let sum = ('' + num).split("").reduce((prev, cur) => {
-        return (+prev) + (+cur);
+    let sum = ('' + num).split("").reduce((pre, cur) => {
+        return (+pre) + (+cur);
     });
+
     return sum > 9 ? getDigitalRoot(sum) : sum;
 }
 
@@ -353,9 +356,9 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-    let s;
-    for(;s!==str;) {
-        s = str;
+    let i;
+    for( ; i !== str; ) {
+        i = str;
         str = str.replace(/\<\>|\(\)|\[\]|\{\}/g, () => '');
     }
     return str.length === 0;
@@ -394,29 +397,29 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    let t = (endDate - startDate) / 1000;
-    if(t <= 45) 
+    let temp = (endDate - startDate) / 1000;
+    if(temp <= 45) 
         return 'a few seconds ago';
-    if(t <= 90) 
+    if(temp <= 90) 
         return 'a minute ago';
-    if(t <= 45 * 60) 
-        return Math.round((t - 0.001) / 60) +' minutes ago';
-    if(t <= 90 * 60) 
+    if(temp <= 45 * 60) 
+        return Math.round((temp - 0.001) / 60) + ' minutes ago';
+    if(temp <= 90 * 60) 
         return 'an hour ago';
-    if(t <= 22 * 60 * 60) 
-        return Math.round((t - 0.001) / (60 * 60)) +' hours ago';
-    if(t <= 36 * 60 * 60) 
+    if(temp <= 22 * 60 * 60) 
+        return Math.round((temp - 0.001) / (60 * 60)) + ' hours ago';
+    if(temp <= 36 * 60 * 60) 
         return 'a day ago';
-    if(t <= 25 * 24 * 60 * 60) 
-        return Math.round((t - 0.001) / (24 * 60 * 60)) +' days ago';
-    if(t <= 45 * 24 * 60 * 60) 
+    if(temp <= 25 * 24 * 60 * 60) 
+        return Math.round((temp - 0.001) / (24 * 60 * 60)) + ' days ago';
+    if(temp <= 45 * 24 * 60 * 60) 
         return 'a month ago';
-    if(t <= 345 * 24 * 60 * 60) 
-        return Math.round((t - 0.001) / (30 * 24 * 60 * 60)) +' months ago';
-    if(t <= 545 * 24 * 60 * 60) 
+    if(temp <= 345 * 24 * 60 * 60) 
+        return Math.round((temp - 0.001) / (30 * 24 * 60 * 60)) + ' months ago';
+    if(temp <= 545 * 24 * 60 * 60) 
         return 'a year ago';
-    if(t >= 545 * 24 * 60 * 60 ) 
-        return Math.round((t - 0.001) / (365 * 24 * 60 * 60)) +' years ago';
+    if(temp >= 545 * 24 * 60 * 60 ) 
+        return Math.round((temp - 0.001) / (365 * 24 * 60 * 60)) + ' years ago';
 }
 
 /**
@@ -456,7 +459,7 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    let commonPath = "";
+    let mainPath = "";
     let parts = new Array(pathes.length);
     let minLength = Infinity;
     for (let i = 0; i < pathes.length; i++){
@@ -474,9 +477,9 @@ function getCommonDirectoryPath(pathes) {
         if (j != parts.length){
             break;
         }
-        commonPath += partValue + "/";
+        mainPath += partValue + "/";
     }
-    return commonPath;
+    return mainPath;
 }
 
 
@@ -499,19 +502,19 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    var aNumRows = m1.length, aNumCols = m1[0].length,
-    bNumRows = m2.length, bNumCols = m2[0].length,
-    m = new Array(aNumRows);
-    for (var r = 0; r < aNumRows; ++r) {
-        m[r] = new Array(bNumCols);
-        for (var c = 0; c < bNumCols; ++c) {
-            m[r][c] = 0;
-            for (var i = 0; i < aNumCols; ++i) {
-                m[r][c] += m1[r][i] * m2[i][c];
+    let rows1 = m1.length, cols1 = m1[0].length,
+    rows2 = m2.length, cols2 = m2[0].length,
+    matrix = new Array(rows1);
+    for (let r = 0; r < rows1; ++r) {
+        matrix[r] = new Array(cols2);
+        for (let c = 0; c < cols2; ++c) {
+            matrix[r][c] = 0;
+            for (let i = 0; i < cols1; ++i) {
+                matrix[r][c] += m1[r][i] * m2[i][c];
             }
         }
     }
-    return m;
+    return matrix;
 }
 
 
@@ -553,9 +556,9 @@ function evaluateTicTacToePosition(position) {
         (position[0][1] == 'X' && position[1][1] == 'X' && position[2][1] == 'X') ||
         (position[0][2] == 'X' && position[1][2] == 'X' && position[2][2] == 'X') ||
         (position[0][0] == 'X' && position[1][1] == 'X' && position[2][2] == 'X') ||
-        (position[0][2] == 'X' && position[1][1] == 'X' && position[2][0] == 'X'))
+        (position[0][2] == 'X' && position[1][1] == 'X' && position[2][0] == 'X')) {
         return 'X';
-    else if 
+    } else if 
         ((position[0][0] == '0' && position[0][1] == '0' && position[0][2] == '0') ||
         (position[1][0] == '0' && position[1][1] == '0' && position[1][2] == '0') ||
         (position[2][0] == '0' && position[2][1] == '0' && position[2][2] == '0') ||
@@ -563,10 +566,11 @@ function evaluateTicTacToePosition(position) {
         (position[0][1] == '0' && position[1][1] == '0' && position[2][1] == '0') ||
         (position[0][2] == '0' && position[1][2] == '0' && position[2][2] == '0') ||
         (position[0][0] == '0' && position[1][1] == '0' && position[2][2] == '0') ||
-        (position[0][2] == '0' && position[1][1] == '0' && position[2][0] == '0'))
+        (position[0][2] == '0' && position[1][1] == '0' && position[2][0] == '0')) {
         return '0';
-    else 
+    } else {
         return undefined;
+    } 
 }
 
 

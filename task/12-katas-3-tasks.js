@@ -31,29 +31,29 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
 
     class RouteMap {
         constructor() {
-            this._route = {};
-            this._width = puzzle[0].length;
-            this._height = puzzle.length;
+            this.route = {};
+            this.width = puzzle[0].length;
+            this.height = puzzle.length;
         }
 
-        _key(x, y) {
+        key(x, y) {
             return `${x},${y}`;
         }
 
         markAvailable(x, y) {
-            this._route[this._key(x, y)] = false;
+            this.route[this.key(x, y)] = false;
         }
 
         markVisited(x, y) {
-            this._route[this._key(x, y)] = true;
+            this.route[this.key(x, y)] = true;
         }
 
         isAvailable(x, y) {
             return x >= 0
-                && x < this._width
+                && x < this.width
                 && y >= 0
-                && y < this._height
-                && !this._route[this._key(x, y)];
+                && y < this.height
+                && !this.route[this.key(x, y)];
         }
     }
 

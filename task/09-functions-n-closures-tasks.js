@@ -27,7 +27,7 @@
  *
  */
 function getComposition(f,g) {
-    return function(x){
+    return function(x) {
         return f(g(x));
     }
 }
@@ -121,13 +121,13 @@ function memoize(func) {
  */
 function retry(func, attempts) {
     let retryer = function() {
-        let retries = attempts;
-        while (retries >= 0) {
+        let ret = attempts;
+        while (ret >= 0) {
             try {
                 return func();
             }
             catch (ex) {
-                retries--;
+                ret--;
             }
         }
     };
@@ -158,27 +158,15 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    return (...args)=>{
-        let str = '';
-        for (let index = 0; index < args.length; index++) {
-            if (args[index] instanceof Array) {
-                str += '[';
-                for (let i = 0; i < args[index].length; i++)
-                    if ((typeof (args[index][i])).toLowerCase() == "string")
-                        str += "\"" + args[index][i] + "\",";
-                    else
-                        str += args[index][i] + ",";
-                str = str.slice(0, str.length - 1);
-                str += '],';
+     return function() {
+            let reserv = Array.prototype.toString
+            Array.prototype.toString = function() {
+                return `[${this.map(elem => typeof(elem) == 'string' ? `\"${elem}\"`: elem).reduce((prev, curr) => `${prev},${curr.toString()}`)}]`
             }
-            else
-                str += args[index] + ',';
-        }
-        str = str.slice(0, str.length - 1);
-        logFunc(`${func.name}(${str}) starts`);
-        let res = func.apply(this, args);
-        logFunc(`${func.name}(${str}) ends`);
-        return res;
+            logFunc(`${func.name}(${Object.values(arguments).join(',')}) starts`)
+            let rez = func(...Object.values(arguments));
+            logFunc(`${func.name}(${Object.values(arguments).join(',')}) ends`)
+            return rez;
     }
 }
 
