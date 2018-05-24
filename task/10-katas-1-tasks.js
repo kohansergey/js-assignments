@@ -232,41 +232,27 @@ function getZigZagMatrix(n) {
  * [[0,0], [0,1], [1,1], [0,2], [1,2], [2,2], [0,3], [1,3], [2,3], [3,3]] => false
  *
  */
-
 function canDominoesMakeRow(dominoes) {
-    let res = "" + dominoes.shift();
-    let i = 0;
-    while (dominoes.length != 0) {
-        if (dominoes[i][0] == res[0]) {
-            res = dominoes[i].reverse() + res;
-            dominoes.splice(i, 1);
-            i = 0;
-            continue;
+    const result = [[]];
+    result[0] = dominoes.shift();
+
+    let lastLength = 0;
+    while (lastLength != dominoes.length && dominoes.length > 0) {
+        lastLength = dominoes.length;
+        for (let i = 0; i < dominoes.length; i++) {
+            if (result[result.length - 1][1] == dominoes[i][0] && result[result.length - 1][0] != dominoes[i][1]) {
+                result[result.length] = dominoes[i];
+                dominoes.splice(i, 1);
+            } else if (result[result.length - 1][1] == dominoes[i][1] && result[result.length - 1][0] != dominoes[i][1]) {
+                result[result.length] = dominoes[i].reverse();
+                dominoes.splice(i, 1);
+            }
         }
-        if (dominoes[i][1] == res[0]) {
-            res = dominoes[i] + res;
-            dominoes.splice(i, 1);
-            i = 0;
-            continue;
-        }
-        if (dominoes[i][0] == res[res.length - 1]) {
-            res = res + dominoes[i];
-            dominoes.splice(i, 1);
-            i = 0;
-            continue;
-        }
-        if (dominoes[i][1] == res[res.length - 1]) {
-            res = res + dominoes[i].reverse();
-            dominoes.splice(i, 1);
-            i = 0;
-            continue;
-        }
-        i++;
-        if (i == dominoes.length)
-            return false;
-    }
-    return true;
+    };
+
+    return !dominoes.length;
 }
+
 
 
 /**
